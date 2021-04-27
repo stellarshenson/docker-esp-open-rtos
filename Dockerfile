@@ -22,7 +22,7 @@ RUN cd /opt/esp-open-sdk/crosstool-NG/config/companion_libs && cat expat.in | se
 # examples directory (will require your makefile to reference $(ESP_OPEN_RTOS)/common.mk
 
 # Get the esp-open-rtos SDK
-RUN git clone --recursive https://github.com/SuperHouse/esp-open-rtos.git /opt/esp-open/rtos
+RUN git clone --recursive https://github.com/SuperHouse/esp-open-rtos.git /opt/esp-open-rtos
 
 # Build the esp-open-sdk
 # Clean out large and now unnecessary crosstool-NG build area
