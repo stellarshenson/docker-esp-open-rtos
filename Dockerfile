@@ -1,9 +1,9 @@
-FROM ubuntu:18.04 
+FROM ubuntu:18.04
 
 # Install build dependencies (and vim + picocom for editing/debugging)
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND="noninteractive" apt-get install -y make unrar-free autoconf automake libtool gcc g++ \
-    gperf flex bison texinfo gawk ncurses-dev libexpat-dev python-dev python sed git unzip \ 
+    gperf flex bison texinfo gawk ncurses-dev libexpat-dev python-dev python sed git unzip \
     bash help2man wget bzip2 libtool-bin python-serial mc vim \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -26,11 +26,14 @@ RUN git clone --recursive https://github.com/SuperHouse/esp-open-rtos.git /opt/e
 
 # Build the esp-open-sdk
 # Clean out large and now unnecessary crosstool-NG build area
-RUN cd /opt/esp-open-sdk && make toolchain esptool libhal STANDALONE=n 
+RUN cd /opt/esp-open-sdk && make toolchain esptool libhal STANDALONE=n
 RUN rm -fr /opt/esp-open-sdk/crosstool-NG
 
 # default project directory (map this with your custom project)
 ENV SDK_PATH=/opt/esp-open-rtos
 ENV PATH="/opt/esp-open-sdk/xtensa-lx106-elf/bin:${PATH}"
+
 WORKDIR /opt/esp-open-rtos/examples/project
 
+# To keep container running
+CMD tail -f /dev/null
