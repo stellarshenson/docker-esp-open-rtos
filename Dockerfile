@@ -36,6 +36,7 @@ FROM ubuntu:18.04 as esp-open-rtos-builder
 RUN apt-get -qq update \
     && DEBIAN_FRONTEND="noninteractive" apt-get install -y make \
     gcc \
+    picocom \
     python \
     python-serial \
     git \
