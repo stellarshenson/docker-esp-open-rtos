@@ -5,4 +5,5 @@ services:
     container_name: esp-open-rtos
     volumes:
         - ./:/opt/esp-open-rtos/examples/project:rw
+        - ./build:/opt/esp-open-rtos/examples/project/build
     command: tail -F /dev/null
